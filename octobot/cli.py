@@ -20,6 +20,8 @@ import argparse
 import os
 import sys
 import multiprocessing
+import sys
+import octobot_commons.errors as errors
 import asyncio
 
 import octobot_commons.os_util as os_util
