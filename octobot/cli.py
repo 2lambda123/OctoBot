@@ -188,7 +188,7 @@ def _read_config(config, logger):
         config = _create_configuration()
         config.read(should_raise=False, fill_missing_fields=True)
     except Exception as e:
-        raise errors.ConfigError(e)
+        print("An error occurred when reading the configuration file: errors.ConfigError")(e)
 
 
 def _validate_config(config, logger):
@@ -326,7 +326,7 @@ def start_octobot(args):
         commands.run_bot(bot, logger)
 
     except errors.ConfigError as e:
-        logger.error("OctoBot can't start without a valid " + common_constants.CONFIG_FILE
+        print("OctoBot can't start without a valid " + common_constants.CONFIG_FILE
                      + " configuration file.\nError: " + str(e) + "\nYou can use " +
                      constants.DEFAULT_CONFIG_FILE + " as an example to fix it.")
         os._exit(-1)
