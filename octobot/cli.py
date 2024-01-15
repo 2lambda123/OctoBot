@@ -335,6 +335,9 @@ def start_octobot(args):
                      "installation using the following command:\nstart.py tentacles --install --all")
         os._exit(-1)
 
+    except Exception as e:
+        logger.exception("OctoBot encountered an error during the GitHub Actions run:")
+        os._exit(-1)
     except errors.ConfigTradingError:
         logger.error("OctoBot can't start without a valid configuration file.\n"
                      "This file is generated on tentacle "
