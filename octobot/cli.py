@@ -255,7 +255,14 @@ def start_octobot(args):
             return
 
         # add args to config
-        update_config_with_args(args, config, logger)
+        try:
+            update_config_with_args(args, config, logger)
+        except errors.ConfigError as e:
+            logger.error("OctoBot configuration error: " + str(e))
+            os._exit(-1)
+        except Exception as e:
+            logger.exception("An error occurred during OctoBot startup: " + str(e))
+            os._exit(-1)
 
         # show terms
         _log_terms_if_unaccepted(config, logger)

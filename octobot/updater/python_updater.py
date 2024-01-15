@@ -16,6 +16,7 @@
 import json
 import os
 import subprocess
+import logging
 from shlex import quote as shlex_quote
 
 import aiohttp

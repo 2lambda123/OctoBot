@@ -35,7 +35,7 @@ class Updater:
                 return False
             return packaging_version.parse(latest_version) > packaging_version.parse(constants.VERSION)
         except TypeError as e:
-            self.logger.debug(f"Error when comparing latest with current OctoBot version: {e}")
+            self.self.logger.error(f"Error when comparing latest with current OctoBot version: {e}")
 
     async def get_latest_version(self):
         raise NotImplementedError("get_latest_version is not implemented")
