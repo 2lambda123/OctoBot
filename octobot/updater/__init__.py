@@ -33,6 +33,22 @@ from octobot.updater.python_updater import (
     PythonUpdater,
 )
 
+from octobot_commons.errors import (
+    ConfigError,
+    NoProfileError,
+    ConfigEvaluatorError,
+    ConfigTradingError
+)
+
+from octobot_commons.exceptions import (
+    ModuleNotFoundError,
+    CalledProcessError,
+    Exception,
+)
+from octobot.updater.python_updater import (
+    PythonUpdater,
+)
+
 __all__ = [
     "Updater",
     "create_updater",
