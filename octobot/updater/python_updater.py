@@ -16,6 +16,7 @@
 import json
 import os
 import subprocess
+import octobot_commons.errors as errors
 from shlex import quote as shlex_quote
 
 import aiohttp
@@ -27,7 +28,7 @@ import octobot.updater.updater as updater_class
 
 
 class PythonUpdater(updater_class.Updater):
-    def __init__(self):
+    def __init__(self, logger=None):
         super().__init__()
         self.use_git = os.path.isdir(".git")
 
@@ -38,6 +39,8 @@ class PythonUpdater(updater_class.Updater):
                     self._run_git_fetch()
                     return self._run_git_get_latest_tag()
                 except subprocess.CalledProcessError as e:
+                    self.logger.error(f"Failed to update with git : {e}")
+                    return None
                     self.logger.debug(f"Failed to update with git : {e}")
                     return None
             # with pip
