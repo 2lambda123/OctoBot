@@ -78,9 +78,9 @@ class PythonUpdater(updater_class.Updater):
                     return True
 
                 # with pip
-    except Exception as e:
-        self.logger.debug(f"Error when fetching latest pypi package data : {e}")
-        return None
+            return False
+        self.logger.debug(f"Error when updating with pip: {e}")
+        return False
                 self._run_pip_update_package(constants.PROJECT_NAME)
                 return True
             return False
