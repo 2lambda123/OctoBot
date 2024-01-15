@@ -227,6 +227,24 @@ def _load_or_create_tentacles(config, logger):
 
 
 def start_octobot(args):
+    try:
+        logger = None
+        if args.version:
+            print(constants.LONG_VERSION)
+    except errors.ConfigError as e:
+        print("OctoBot can't start without a valid " + common_constants.CONFIG_FILE + " configuration file.\nError: " + str(e) + "\nYou can use " + constants.DEFAULT_CONFIG_FILE + " as an example to fix it.")
+        os._exit(-1)
+    except errors.NoProfileError:
+        print("Missing default profiles. OctoBot can't start without a valid default profile configuration. Please make sure that the {config.profiles_path} folder is accessible. To reinstall default profiles, delete the '{tentacles_manager_constants.TENTACLES_PATH}' folder or start OctoBot with the following arguments: tentacles --install --all")
+        os._exit(-1)
+    except ModuleNotFoundError as e:
+        if 'tentacles' in str(e):
+            print("Impossible to start OctoBot, tentacles are missing. To install tentacles, please use the following command: start.py tentacles --install --all")
+        else:
+            print("ERROR:", e)
+        os._exit(-1)
+    except errors.ConfigTradingError:
+        print("OctoBot can't start without a valid configuration file.\nThis file is generated on tentacle installation using the following command:\nstart.py tentacles --install --all")
     logger = None
     try:
         if args.version:
