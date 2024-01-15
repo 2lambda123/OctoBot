@@ -381,7 +381,8 @@ def octobot_parser(parser):
     parser.add_argument('--encrypter', help="Start the exchange api keys encrypter. This tool is useful to manually add"
                                             " exchanges configuration in your config.json without using any interface "
                                             "(ie the web interface that handle encryption automatically).",
-                        action='store_true')
+                        action='store_true',
+                        required=False)
     parser.add_argument('--identifier', help="OctoBot community identifier.", type=str, nargs=1)
     parser.add_argument('-o', '--strategy_optimizer', help='Start Octobot strategy optimizer. This mode will make '
                                                            'octobot play backtesting scenarii located in '
